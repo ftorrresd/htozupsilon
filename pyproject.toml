@@ -21,7 +21,9 @@ classifiers = [
 ]
 dependencies = [
     "typer",
-    "scikit-build-core>=0.10"
+    "scikit-build-core>=0.10",
+    "atlasplots",
+    "dbs3-client",
 ]
 
 [build-system]

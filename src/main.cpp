@@ -1,5 +1,10 @@
 #include "pybind11/pybind11.h"
 
+#include <ROOT/RDataFrame.hxx>
+#include <ROOT/RVec.hxx>
+
+#include <iostream>
+
 #include "htozupsilon.hpp"
 
 #define STRINGIFY(x) #x
@@ -27,12 +32,20 @@ PYBIND11_MODULE(_core, m) {
         Some other explanation about the add function.
     )pbdoc");
 
-  m.def(
-      "subtract", [](int i, int j) { return i - j; }, R"pbdoc(
-        Subtract two numbers
+  m.def("run", [](const std::string input_file) {
+    std::cout << "Processing: " << input_file << std::endl;
 
-        Some other explanation about the subtract function.
-    )pbdoc");
+    ROOT::EnableImplicitMT();
+
+    auto df = ROOT::RDataFrame("Events", input_file);
+
+    auto sum = 0.;
+    df.Foreach(
+        [&](ROOT::RVec<float> Muon_pt) { sum += ROOT::VecOps::Sum(Muon_pt); },
+        {"Muon_pt"});
+
+    printf("Sum: %f\n", sum);
+  });
 
 #ifdef VERSION_INFO
   m.attr("__version__") = MACRO_STRINGIFY(VERSION_INFO);

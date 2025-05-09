@@ -5,12 +5,18 @@ from __future__ import annotations
 import typer
 
 import htozupsilon as hzu
+from configurations import config
 
 app = typer.Typer(
     no_args_is_help=True,
     pretty_exceptions_show_locals=False,
 )
 
+@app.command()
+def run():
+    # print(config)
+    # input_file= f"root://cmsxrootd.fnal.gov//{hzu.das.get_files('/DoubleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9_GT36-v1/NANOAOD')[0]}"
+    hzu.run("test.root")
 
 @app.command()
 def add():

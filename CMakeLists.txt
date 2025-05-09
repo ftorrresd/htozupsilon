@@ -51,6 +51,7 @@ add_link_options(
     -lfmt
     -lz
     -lstdc++fs
+    -lcorrectionlib
     -L/cvmfs/sft.cern.ch/lcg/views/LCG_107a/x86_64-el9-gcc14-opt/lib
     -L/cvmfs/sft.cern.ch/lcg/views/LCG_107a/x86_64-el9-gcc14-opt/lib64
 )

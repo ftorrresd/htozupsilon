@@ -29,7 +29,7 @@ set(LCG_BASE /cvmfs/sft.cern.ch/lcg/views/LCG_107a/x86_64-el9-gcc14-opt)
 find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
 find_package(pybind11 CONFIG REQUIRED)
 
-
+# root compiler options
 execute_process(COMMAND root-config --cflags OUTPUT_VARIABLE ROOT_CFLAGS OUTPUT_STRIP_TRAILING_WHITESPACE)
 separate_arguments(ROOT_CFLAGS)
 
@@ -56,8 +56,7 @@ add_link_options(
     -L/cvmfs/sft.cern.ch/lcg/views/LCG_107a/x86_64-el9-gcc14-opt/lib64
 )
 
-# Add a library using FindPython's tooling (pybind11 also provides a helper like
-# this)
+# Add a library using FindPython's tooling (pybind11 also provides a helper like this)
 python_add_library(_core MODULE src/main.cpp WITH_SOABI)
 target_include_directories(_core
     PRIVATE

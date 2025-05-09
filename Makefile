@@ -15,8 +15,8 @@ venv:
 		echo "Creating virtual environment..."; \
 		$(PYTHON) -m venv $(VENV_DIR); \
 		echo "Installing scikit_build_core..."; \
-		$(PIP) install --upgrade pip; \
 		$(PIP) install scikit_build_core; \
+		$(PIP) install --upgrade pip; \
 	else \
 		echo "Virtual environment already exists."; \
 	fi
@@ -24,13 +24,14 @@ venv:
 # Install the package
 install: venv
 	@echo "Installing package..."
-	@source $(VENV_DIR)/bin/activate && $(PIP) install --no-build-isolation -v .
+	@source $(VENV_DIR)/bin/activate && PY_COLORS=1 FORCE_COLOR=1 $(PIP) install --no-build-isolation -v .
 	@echo "Installation complete!"
 
 # Clean up
 clean:
 	@echo "Cleaning up..."
-	rm -rf build/ dist/ *.egg-info/
+	rm -rf build/ dist/ *.egg-info/ 
+	pip uninstall -y htozupsilon
 	@echo "Cleaned build artifacts."
 
 # Help target

@@ -41,7 +41,7 @@ separate_arguments(ROOT_LDFLAGS)
 execute_process(COMMAND root-config --libs OUTPUT_VARIABLE ROOT_LIBS OUTPUT_STRIP_TRAILING_WHITESPACE)
 separate_arguments(ROOT_LIBS)
 
-add_compile_options(${ROOT_CFLAGS} -fdiagnostics-color=always -MD -MP -O3 -Wall -march=native -pthread -m64 -ffloat-store -g)
+add_compile_options(${ROOT_CFLAGS} -fdiagnostics-color=always -MD -MP -O3 -Wall -Wextra -Werror -march=native -pthread -m64 -ffloat-store -g)
 add_link_options(
     ${ROOT_LDFLAGS}
     ${ROOT_LIBS}
